@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#030712">
+    <title>الزعيم أكاديمي | المنصة الرسمية للأستاذ أيمن حمدي</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#030712',
+                            card: '#0B0F19',
+                            gold: '#D4AF37',
+                            goldHover: '#AA820A',
+                            neonBlue: '#00F0FF',
+                            accent: '#F97316'
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-brand-dark text-slate-100 font-cairo selection:bg-brand-gold selection:text-black min-h-screen overflow-x-hidden relative">
+
+    <!-- Unified Toast Notification Container -->
+    <div id="toast-container" class="fixed top-5 left-1/2 -translate-x-1/2 z-[100] w-[92%] max-w-md pointer-events-none flex flex-col gap-3"></div>
+
+    <!-- Dynamic Particle Canvas Background -->
+    <canvas id="bg-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Header / Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-brand-dark/70 border-b border-slate-800/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group" aria-label="الصفحة الرئيسية للزعيم أكاديمي">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-gold to-yellow-200 flex items-center justify-center text-black font-black text-xl shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:scale-105 transition-transform duration-300">
+                    ز
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-100 via-brand-gold to-yellow-500">الـزعـيـم</span>
+                    <span class="text-[10px] text-slate-400 tracking-widest uppercase -mt-1">ACADEMY</span>
+                </div>
+            </a>
+
+            <!-- Navigation Controls -->
+            <div class="flex items-center gap-3 sm:gap-6">
+                <!-- Language Toggle -->
+                <button id="lang-btn" aria-label="تغيير اللغة" class="px-3 py-1.5 rounded-lg border border-slate-700/80 hover:border-brand-gold/50 text-xs font-semibold text-slate-300 hover:text-brand-gold transition-all duration-300 flex items-center gap-2">
+                    <i class="fa-solid font-bold fa-globe text-brand-gold"></i>
+                    <span id="lang-text">AR</span>
+                </button>
+
+                <!-- Dark/Light Theme Toggle Switch -->
+                <button id="theme-toggle" type="button" aria-label="تبديل الثيم" class="relative w-14 h-7 bg-slate-900 border border-slate-700 rounded-full p-1 cursor-pointer transition-colors duration-300 flex items-center justify-between shadow-inner focus:outline-none">
+                    <i class="fa-solid fa-moon text-yellow-400 text-xs z-10 mr-1"></i>
+                    <i class="fa-solid fa-sun text-slate-600 text-xs z-10 ml-1"></i>
+                    <div id="theme-ball" class="absolute top-0.5 left-0.5 w-6 h-6 bg-gradient-to-r from-brand-gold to-yellow-500 rounded-full transition-transform duration-300 shadow-md"></div>
+                </button>
+
+                <!-- Admin Portal Button -->
+                <button id="admin-login-btn" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 hover:border-slate-500 text-slate-200 transition-all duration-300 flex items-center gap-2">
+                    <i class="fa-solid fa-user-shield text-brand-neonBlue"></i>
+                    <span class="hidden sm:inline">لوحة الأدمن</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="relative z-10 pt-20">
+
+        <!-- Hero Interactive Landing Section -->
+        <section class="min-h-[calc(100vh-5rem)] flex items-center justify-center relative px-4 sm:px-6 lg:px-8 py-12">
+            <div class="max-w-4xl mx-auto text-center space-y-8">
+                
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs sm:text-sm font-semibold tracking-wide backdrop-blur-sm animate-pulse">
+                    <i class="fa-solid fa-crown text-yellow-400"></i>
+                    <span>المنصة الرسمية الأولى في المواد الفلسفية</span>
+                </div>
+
+                <!-- Typing Dynamic Heading -->
+                <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight">
+                    <span class="block text-slate-100">طريقك للقمة يبدأ مع</span>
+                    <span id="typing-text" class="block text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-yellow-200 to-amber-500 min-h-[1.3em]"></span>
+                </h1>
+
+                <!-- Subtitle (Hero Caption) -->
+                <p id="hero-subtitle" class="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-tajawal leading-relaxed">
+                    منظومة تعليمية تفاعلية بأسلوب التحليل والفهم المنطقي بعيداً عن الحفظ التلقيني. احتفل بتفوقك واضمن الدرجة النهائية.
+                </p>
+
+                <!-- Interactive Hero CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 pt-4">
+                    <button id="open-booking-modal" class="ui-sound-btn w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-slate-950 font-black text-lg shadow-[0_0_25px_rgba(212,175,55,0.4)] hover:shadow-[0_0_35px_rgba(212,175,55,0.7)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>احجز مقعدك الآن</span>
+                    </button>
+
+                    <button id="scroll-to-about" class="ui-sound-btn w-full sm:w-auto px-8 py-4 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-500 text-slate-200 font-bold text-lg backdrop-blur-md hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-user-tie text-brand-gold"></i>
+                        <span>عن الزعيم</span>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- About Mr. Ayman Hamdy (3D Tilt Card Section) -->
+        <section id="about-section" class="py-20 px-4 sm:px-6 lg:px-8 border-t border-slate-800/40 relative">
+            <div class="max-w-6xl mx-auto">
+                <div id="tilt-card" class="bg-brand-card border border-slate-800 rounded-3xl p-6 sm:p-10 md:p-12 shadow-2xl relative overflow-hidden transition-transform duration-200 ease-out">
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                        <!-- Image Container with Glow -->
+                        <div class="lg:col-span-5 relative group">
+                            <div class="absolute -inset-1 bg-gradient-to-r from-brand-gold to-brand-neonBlue rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
+                            <div class="relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-700/60 aspect-[4/5] flex items-center justify-center">
+                                <img id="hero-teacher-img" src="https://via.placeholder.com/500x625?text=Mr.+Ayman+Hamdy" alt="الأستاذ أيمن حمدي" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-80"></div>
+                                <div class="absolute bottom-4 right-4 left-4 text-center">
+                                    <span class="inline-block px-3 py-1 rounded-full bg-brand-gold/20 border border-brand-gold/40 text-brand-gold text-xs font-bold mb-1">خبير المواد الفلسفية</span>
+                                    <h3 class="text-xl font-bold text-white">الأستاذ أيمن حمدي</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Container -->
+                        <div class="lg:col-span-7 space-y-6">
+                            <h2 class="text-2xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-brand-gold">
+                                "الزعيم في المواد الفلسفية"
+                            </h2>
+                            <blockquote id="about-quote" class="text-slate-300 font-tajawal text-base sm:text-lg leading-relaxed border-r-4 border-brand-gold pr-4 italic">
+                                "نأخذك في رحلة للتحليل والتفكير المنطقي بعيداً عن الحفظ والتكرار التقليدي، لنضمن لك الوصول إلى أعلى مراتب التفوق واعتلاء القمة دائماً."
+                            </blockquote>
+
+                            <!-- Animated Counter Stats -->
+                            <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-800">
+                                <div class="text-center p-3 rounded-2xl bg-slate-900/50 border border-slate-800">
+                                    <span id="counter-exp" class="counter-val text-2xl sm:text-3xl font-black text-brand-gold block" data-target="15">15</span>
+                                    <span class="text-xs text-slate-400 font-semibold">سنوات خبرة</span>
+                                </div>
+                                <div class="text-center p-3 rounded-2xl bg-slate-900/50 border border-slate-800">
+                                    <span id="counter-students" class="counter-val text-2xl sm:text-3xl font-black text-brand-neonBlue block" data-target="10000">10000</span>
+                                    <span class="text-xs text-slate-400 font-semibold">طالب متفوق</span>
+                                </div>
+                                <div class="text-center p-3 rounded-2xl bg-slate-900/50 border border-slate-800">
+                                    <span id="counter-success" class="counter-val text-2xl sm:text-3xl font-black text-emerald-400 block" data-target="99">99</span>
+                                    <span class="text-xs text-slate-400 font-semibold">% نسبة النجاح</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Glassmorphism Booking Modal -->
+    <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-lg opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-brand-card border border-slate-700/80 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative shadow-[0_0_50px_rgba(0,0,0,0.8)] custom-scrollbar">
+            
+            <button id="close-booking-modal" aria-label="إغلاق النافذة" class="absolute top-5 left-5 w-9 h-9 rounded-full bg-slate-800 border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-700 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-black text-white mb-2">استمارة الحجز الذكي</h3>
+                <p class="text-xs sm:text-sm text-slate-400 font-tajawal">اختر صفك الدراسي والمجموعة المناسبة لك لتأكيد مقعدك مباشرة</p>
+            </div>
+
+            <!-- Booking Form -->
+            <form id="booking-form" class="space-y-6">
+                <div class="space-y-4">
+                    <div>
+                        <label for="student-name" class="block text-xs font-bold text-slate-300 mb-1.5">اسم الطالب الثلاثي</label>
+                        <input type="text" id="student-name" required placeholder="أدخل اسمك بالكامل..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="student-phone" class="block text-xs font-bold text-slate-300 mb-1.5">رقم هاتف الطالب</label>
+                            <input type="tel" id="student-phone" required placeholder="01xxxxxxxxx" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition text-left" dir="ltr">
+                        </div>
+                        <div>
+                            <label for="parent-phone" class="block text-xs font-bold text-slate-300 mb-1.5">رقم هاتف ولي الأمر</label>
+                            <input type="tel" id="parent-phone" required placeholder="01xxxxxxxxx" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition text-left" dir="ltr">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="block text-xs font-bold text-slate-300 mb-2">الصف الدراسي</span>
+                    <div class="grid grid-cols-3 gap-2 p-1 bg-slate-900 rounded-2xl border border-slate-800">
+                        <button type="button" data-grade="grade-1" class="grade-tab active-tab py-2.5 rounded-xl text-xs sm:text-sm font-bold transition text-center">الأول الثانوي</button>
+                        <button type="button" data-grade="grade-2" class="grade-tab text-slate-400 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition text-center">الثاني الثانوي</button>
+                        <button type="button" data-grade="grade-3" class="grade-tab text-slate-400 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition text-center">الثالث الثانوي</button>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="block text-xs font-bold text-slate-300 mb-2">المجموعات والسناتر المتاحة</span>
+                    <div id="groups-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <!-- Dynamic Group Cards -->
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-slate-950 font-black text-base shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-check-circle"></i>
+                    <span>تأكيد الحجز واستخراج الكارت</span>
+                </button>
+            </form>
+
+            <!-- Digital ID Badge Result -->
+            <div id="digital-badge" class="hidden text-center space-y-6 pt-4">
+                <div class="p-6 bg-gradient-to-br from-slate-900 via-brand-card to-slate-900 border-2 border-brand-gold rounded-3xl relative overflow-hidden shadow-2xl text-right">
+                    <div class="flex justify-between items-start mb-4 border-b border-slate-800 pb-3">
+                        <div>
+                            <span class="text-[10px] text-brand-gold font-bold uppercase tracking-wider block">بطاقة حجز إلكترونية</span>
+                            <h4 class="text-lg font-black text-white">الزعيم أكاديمي</h4>
+                        </div>
+                        <div class="w-8 h-8 rounded-lg bg-brand-gold text-black font-black flex items-center justify-center text-sm">ز</div>
+                    </div>
+                    
+                    <div class="space-y-2 text-xs sm:text-sm">
+                        <p class="text-slate-300"><strong class="text-slate-400">الاسم:</strong> <span id="badge-name" class="text-white font-bold"></span></p>
+                        <p class="text-slate-300"><strong class="text-slate-400">الصف:</strong> <span id="badge-grade" class="text-white font-bold"></span></p>
+                        <p class="text-slate-300"><strong class="text-slate-400">السنتر والموعد:</strong> <span id="badge-group" class="text-brand-gold font-bold"></span></p>
+                        <p class="text-slate-300"><strong class="text-slate-400">كود الحجز:</strong> <span id="badge-code" class="text-brand-neonBlue font-mono font-bold"></span></p>
+                    </div>
+
+                    <div id="badge-qr-code-box" class="mt-4 pt-3 border-t border-slate-800/80 flex flex-col items-center justify-center">
+                        <div id="qrcode-canvas" class="p-2 bg-white rounded-xl shadow-lg"></div>
+                        <span class="text-[10px] text-slate-400 mt-2 font-mono">رمز الدخول الذكي للسنتر</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button id="send-whatsapp-btn" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span>إرسال التفاصيل عبر واتساب</span>
+                    </button>
+                    <button id="reset-booking-btn" class="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs sm:text-sm transition">
+                        حجز جديد
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-brand-card border border-slate-800 rounded-3xl w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
+            
+            <div id="admin-lockscreen" class="p-8 sm:p-12 text-center max-w-md mx-auto my-auto space-y-6">
+                <div class="w-16 h-16 bg-slate-800 border border-slate-700 rounded-2xl flex items-center justify-center text-brand-neonBlue text-2xl mx-auto">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-1">لوحة تحكم الزعيم</h3>
+                    <p class="text-xs text-slate-400">أدخل الرمز السري للوصول لبيانات الطلاب</p>
+                </div>
+                <form id="admin-login-form" class="space-y-4">
+                    <input type="password" id="admin-passcode" required placeholder="الرمز السري..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-center text-white font-mono tracking-widest focus:outline-none focus:border-brand-neonBlue transition">
+                    <button type="submit" class="w-full py-3 rounded-xl bg-brand-neonBlue hover:bg-cyan-400 text-black font-bold transition">دخول</button>
+                </form>
+            </div>
+
+            <div id="admin-dashboard-content" class="hidden flex-col h-full overflow-hidden">
+                <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/50">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-chart-line text-brand-gold text-xl"></i>
+                        <h3 class="text-lg font-bold text-white">إدارة الطلاب والحجوزات</h3>
+                    </div>
+                    <button id="close-admin-modal" aria-label="إغلاق لوحة الأدمن" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+                </div>
+
+                <div class="p-6 overflow-y-auto space-y-6 custom-scrollbar flex-1">
+                    <!-- Analytics Cards -->
+                    <div id="stats-analytics-card" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+                        <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800">
+                            <span class="text-xs text-slate-400 block font-semibold">إجمالي المسجلين</span>
+                            <span id="stat-total" class="text-2xl font-black text-white mt-1 block">0</span>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 cursor-pointer hover:border-brand-gold/50 transition">
+                            <span class="text-xs text-slate-400 block font-semibold">الأول الثانوي</span>
+                            <span id="stat-g1" class="text-2xl font-black text-brand-gold mt-1 block">0</span>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 cursor-pointer hover:border-brand-gold/50 transition">
+                            <span class="text-xs text-slate-400 block font-semibold">الثاني الثانوي</span>
+                            <span id="stat-g2" class="text-2xl font-black text-brand-neonBlue mt-1 block">0</span>
+                        </div>
+                        <div id="stat-g3-card" class="p-4 rounded-2xl bg-slate-900 border border-slate-800 cursor-pointer hover:border-brand-gold/50 transition group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-slate-400 block font-semibold group-hover:text-brand-gold transition">الثالث الثانوي</span>
+                                <i class="fa-solid fa-chevron-left text-[10px] text-slate-600 group-hover:text-brand-gold transition"></i>
+                            </div>
+                            <span id="stat-g3" class="text-2xl font-black text-amber-400 mt-1 block">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Filter Toolbar -->
+                    <div id="admin-toolbar" class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
+                        <input type="text" id="admin-search" placeholder="بحث باسم الطالب أو رقم الهاتف..." class="w-full sm:w-72 bg-slate-950 border border-slate-700 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-brand-gold">
+                        
+                        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                            <button id="export-excel-btn" class="px-4 py-2 rounded-xl bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-600 hover:text-white text-xs font-bold transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-file-excel"></i>
+                                <span>تصدير CSV</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Main Table -->
+                    <div class="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/40">
+                        <table class="w-full text-right text-xs">
+                            <thead class="bg-slate-900 text-slate-400 border-b border-slate-800">
+                                <tr>
+                                    <th class="p-3">اسم الطالب</th>
+                                    <th class="p-3">رقم الطالب</th>
+                                    <th class="p-3">رقم ولي الأمر</th>
+                                    <th class="p-3">الصف</th>
+                                    <th class="p-3">المجموعة/السنتر</th>
+                                    <th class="p-3 text-center">إجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal: تعديل محتوى الصفحة الإحصائيات -->
+    <div id="modal-content-editor" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[100] hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 w-full max-w-2xl shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button id="close-content-editor-btn" class="absolute top-4 left-4 text-slate-400 hover:text-white w-8 h-8 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-center justify-center mx-auto mb-2 text-amber-400">
+                    <i class="fa-solid fa-pen-to-square text-xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white">تعديل محتوى الصفحة والإحصائيات</h3>
+                <p class="text-xs text-slate-400 mt-1">يمكنك تحديث الكابشن، وصف عن الزعيم، والأرقام التفاعلية مباشرة</p>
+            </div>
+
+            <form id="site-content-form" class="space-y-5">
+                <div class="bg-slate-800/40 p-4 rounded-2xl border border-slate-700/60 space-y-2">
+                    <label for="input-hero-caption" class="block text-xs font-bold text-brand-gold flex items-center gap-2">
+                        <i class="fa-solid fa-heading"></i> 1. كابشن الوصف الرئيسي (الهيرو)
+                    </label>
+                    <textarea id="input-hero-caption" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold transition leading-relaxed"></textarea>
+                </div>
+
+                <div class="bg-slate-800/40 p-4 rounded-2xl border border-slate-700/60 space-y-2">
+                    <label for="input-about-quote" class="block text-xs font-bold text-brand-gold flex items-center gap-2">
+                        <i class="fa-solid fa-quote-right"></i> 2. الوصف/الاقتباس في قسم (عن الزعيم)
+                    </label>
+                    <textarea id="input-about-quote" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold transition leading-relaxed"></textarea>
+                </div>
+
+                <div class="bg-slate-800/40 p-4 rounded-2xl border border-slate-700/60 space-y-3">
+                    <label class="block text-xs font-bold text-brand-gold flex items-center gap-2 mb-1">
+                        <i class="fa-solid fa-chart-simple"></i> 3. تعديل الإحصائيات والأرقام التفاعلية
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label for="input-stat-exp" class="block text-[11px] font-medium text-slate-400 mb-1">سنوات الخبرة</label>
+                            <input type="number" id="input-stat-exp" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+                        </div>
+                        <div>
+                            <label for="input-stat-students" class="block text-[11px] font-medium text-slate-400 mb-1">عدد الطلاب المتفوقين</label>
+                            <input type="number" id="input-stat-students" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+                        </div>
+                        <div>
+                            <label for="input-stat-success" class="block text-[11px] font-medium text-slate-400 mb-1">نسبة النجاح (%)</label>
+                            <input type="number" id="input-stat-success" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-slate-950 font-black text-xs sm:text-sm shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span>حفظ وتطبيق التغييرات فوراً</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: سجل الحضور والغياب والماسح الذكي -->
+    <div id="modal-attendance-control" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[120] hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 w-full max-w-4xl shadow-2xl relative max-h-[92vh] overflow-hidden flex flex-col custom-scrollbar">
+            <button id="close-attendance-modal-btn" class="absolute top-4 left-4 text-slate-400 hover:text-white w-8 h-8 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+
+            <div class="text-center mb-4 shrink-0">
+                <div class="w-12 h-12 bg-cyan-500/10 border border-cyan-500/30 rounded-2xl flex items-center justify-center mx-auto mb-2 text-cyan-400">
+                    <i class="fa-solid fa-clipboard-user text-xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white">نظام الحضور والغياب والماسح الذكي</h3>
+                <p class="text-xs text-slate-400 mt-0.5">تسجيل الحضور عبر ماسح الـ QR أو كود الطالب وإرسال إشعارات الغياب</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-800/40 p-3 rounded-2xl border border-slate-700/50 mb-4 shrink-0">
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-300 mb-1">اختر الصف الدراسي</label>
+                    <select id="att-grade-select" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-brand-gold">
+                        <option value="grade1">الصف الأول الثانوي</option>
+                        <option value="grade2">الصف الثاني الثانوي</option>
+                        <option value="grade3">الصف الثالث الثانوي</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-300 mb-1">اختر المجموعة / السنتر</label>
+                    <select id="att-group-select" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-brand-gold">
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-300 mb-1">تاريخ الحصة / الأسبوع</label>
+                    <input type="date" id="att-date-input" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-brand-gold">
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4 bg-slate-900 p-3 rounded-2xl border border-slate-800 shrink-0">
+                <div class="flex items-center gap-2">
+                    <button id="btn-toggle-qr-scanner" class="px-3.5 py-2 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 hover:bg-cyan-500 hover:text-black text-xs font-bold transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-qrcode text-sm"></i>
+                        <span id="qr-btn-text">فتح ماسح الـ QR</span>
+                    </button>
+                    <input type="text" id="att-quick-code" placeholder="أدخل كود الطالب أو اسمه..." class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold w-48">
+                    <button id="att-quick-add-btn" class="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition cursor-pointer">تحضير</button>
+                </div>
+
+                <div class="flex items-center gap-1 bg-slate-800 p-1 rounded-xl">
+                    <button id="tab-att-all" class="px-3 py-1 rounded-lg text-xs font-bold bg-brand-gold text-black transition">الكل (<span id="count-att-all">0</span>)</button>
+                    <button id="tab-att-present" class="px-3 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition">الحاضرون (<span id="count-att-present">0</span>)</button>
+                    <button id="tab-att-absent" class="px-3 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition">الغياب (<span id="count-att-absent">0</span>)</button>
+                </div>
+            </div>
+
+            <div id="qr-reader-container" class="hidden mb-4 p-3 bg-slate-950 border border-cyan-500/30 rounded-2xl text-center relative shrink-0">
+                <div id="qr-reader" class="max-w-xs mx-auto overflow-hidden rounded-xl border border-slate-700"></div>
+                <p class="text-[11px] text-cyan-400 mt-2 font-bold">وجّه كاميرا الهاتف نحو الـ QR Code الخاص بالطالب للتحضير الفوري</p>
+            </div>
+
+            <div class="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/60 custom-scrollbar flex-1">
+                <table class="w-full text-right text-xs">
+                    <thead class="bg-slate-900 text-slate-400 border-b border-slate-800 sticky top-0 z-10">
+                        <tr>
+                            <th class="p-3">الكود</th>
+                            <th class="p-3">اسم الطالب</th>
+                            <th class="p-3">رقم ولي الأمر</th>
+                            <th class="p-3 text-center">حالة الحضور</th>
+                            <th class="p-3 text-center">إشعار ولي الأمر</th>
+                        </tr>
+                    </thead>
+                    <tbody id="att-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Confirmation Modal -->
+    <div id="zaeem-confirm-modal" class="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-brand-card border border-slate-800 rounded-3xl w-full max-w-sm p-6 text-center space-y-5 shadow-[0_0_40px_rgba(0,0,0,0.8)] transform scale-95 transition-transform duration-300" id="zaeem-confirm-card">
+            <div class="w-14 h-14 bg-red-500/10 border border-red-500/30 text-red-400 rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div>
+                <h4 class="text-lg font-black text-white mb-1">تأكيد الإجراء</h4>
+                <p class="text-xs text-slate-300 font-tajawal leading-relaxed" id="zaeem-confirm-msg">هل أنت متأكد من هذا الإجراء؟</p>
+            </div>
+            <div class="flex items-center gap-3 pt-2">
+                <button id="zaeem-confirm-yes" class="flex-1 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs transition shadow-[0_0_15px_rgba(239,68,68,0.3)] cursor-pointer">
+                    تأكيد
+                </button>
+                <button id="zaeem-confirm-no" class="flex-1 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition cursor-pointer">
+                    إلغاء
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Libraries & QR Generators -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const adminToolbar = document.getElementById('admin-toolbar');
+            if (adminToolbar) {
+                const uploadContainer = document.createElement('div');
+                uploadContainer.className = 'flex items-center gap-2 mt-2 sm:mt-0';
+                uploadContainer.innerHTML = `
+                    <label for="admin-photo-input" class="cursor-pointer px-4 py-2 rounded-xl bg-brand-gold/20 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-black text-xs font-bold transition flex items-center gap-1.5 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
+                        <i class="fa-solid fa-camera"></i>
+                        <span>تغيير صورة المستر</span>
+                    </label>
+                    <input type="file" id="admin-photo-input" accept="image/*" class="hidden">
+                    <button id="reset-photo-btn" class="px-3 py-2 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500 hover:text-white text-xs font-bold transition" title="إعادة الصورة الافتراضية">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </button>
+                `;
+                adminToolbar.appendChild(uploadContainer);
+            }
+        });
+    </script>
+<!-- Footer Section -->
+<footer class="relative z-10 border-t border-slate-800/80 bg-slate-950/80 backdrop-blur-lg py-6 px-4 sm:px-6 lg:px-8 mt-12">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-slate-400">
+        
+        <!-- Rights Reserved -->
+        <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+            <span id="footer-rights">جميع الحقوق محفوظة © منصة الزعيم أكاديمي 2026</span>
+        </div>
+
+        <!-- Developer Credit Badge -->
+        <div class="flex items-center gap-2.5 bg-slate-900 border border-slate-800/90 px-4 py-2 rounded-xl shadow-sm hover:border-brand-gold/40 transition-all duration-300">
+            <i class="fa-solid fa-code text-brand-gold text-xs"></i>
+            <span class="text-brand-gold font-mono font-black text-xs tracking-widest uppercase">
+                CREATED BY BELAL OSAMA
+            </span>
+        </div>
+
+    </div>
+</footer>
+</body>
+</html>

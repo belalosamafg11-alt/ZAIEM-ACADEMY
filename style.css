@@ -1,0 +1,276 @@
+/* ==========================================================================
+   1. CORE & GLOBAL STYLES
+   ========================================================================== */
+
+html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #030712;
+    color: #f1f5f9;
+    font-family: 'Cairo', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Custom Scrollbar Stylings */
+.custom-scrollbar::-webkit-scrollbar,
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track,
+::-webkit-scrollbar-track {
+    background: #0b0f19;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 4px;
+    border: 2px solid #0b0f19;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #d4af37;
+}
+
+/* ==========================================================================
+   2. GLASSMORPHISM & CONTAINER EFFECTS
+   ========================================================================== */
+
+.glass-panel {
+    background: rgba(11, 15, 25, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   3. ANIMATIONS & LIGHTING EFFECTS
+   ========================================================================== */
+
+.gold-glow {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+}
+
+.neon-glow {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+}
+
+/* Typing Caret Animation */
+#typing-text::after {
+    content: '|';
+    color: #d4af37;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Tab Selection Custom Styles */
+.grade-tab {
+    background-color: transparent;
+    color: #94a3b8;
+    border: 1px solid transparent;
+}
+
+.grade-tab.active-tab {
+    background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
+    color: #030712 !important;
+    border-color: #fef08a;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Group Selection Cards */
+.group-select-card {
+    cursor: pointer;
+    background: #090d16;
+    border: 1px solid #1e293b;
+    border-radius: 1rem;
+    padding: 1rem;
+    transition: all 0.25s ease;
+}
+
+.group-select-card:hover {
+    border-color: #d4af37;
+    background: rgba(212, 175, 55, 0.05);
+}
+
+.group-select-card.selected {
+    border-color: #d4af37;
+    background: rgba(212, 175, 55, 0.15);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+}
+
+/* ==========================================================================
+   4. CONTROLLED LIGHT MODE OVERRIDES
+   ========================================================================== */
+
+html.light body {
+    background-color: #f8fafc;
+    color: #0f172a;
+}
+
+html.light header {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-bottom-color: #cbd5e1;
+}
+
+html.light .bg-brand-dark {
+    background-color: #f8fafc;
+}
+
+html.light .bg-brand-card {
+    background-color: #ffffff;
+    border-color: #e2e8f0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+html.light main h1 span.text-slate-100,
+html.light main p.text-slate-400,
+html.light #about-section h2,
+html.light #about-section blockquote {
+    color: #1e293b !important;
+}
+
+html.light .bg-slate-900, 
+html.light .bg-slate-950 {
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+html.light input,
+html.light select,
+html.light textarea {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+}
+
+html.light #typing-text {
+    color: #b45309;
+}
+
+/* ==========================================================================
+   5. RESPONSIVE UTILITIES & TEACHER PHOTO STYLES
+   ========================================================================== */
+
+@media (max-width: 640px) {
+    #tilt-card {
+        transform: none !important;
+    }
+}
+
+#about-section img {
+    transition: filter 0.3s ease, transform 0.5s ease;
+}
+
+.photo-updating {
+    filter: blur(8px) brightness(0.7);
+}
+
+.photo-glow-flash {
+    animation: flashGlow 1s ease-out;
+}
+
+@keyframes flashGlow {
+    0% {
+        box-shadow: 0 0 0px rgba(212, 175, 55, 0);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(212, 175, 55, 0.9);
+    }
+    100% {
+        box-shadow: 0 0 0px rgba(212, 175, 55, 0);
+    }
+}
+
+/* ==========================================================================
+   6. UNIFIED SINGLE TOAST SYSTEM
+   ========================================================================== */
+
+.toast-card {
+    background: rgba(11, 15, 25, 0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 1.25rem;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    color: #ffffff;
+    pointer-events: auto;
+    transform: translateY(-30px) scale(0.95);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.toast-card.show {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.toast-card.toast-error {
+    border: 1px solid rgba(239, 68, 68, 0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(239, 68, 68, 0.35);
+}
+
+.toast-card.toast-error .toast-icon {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #ef4444;
+}
+
+.toast-card.toast-success {
+    border: 1px solid rgba(16, 185, 129, 0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(16, 185, 129, 0.35);
+}
+
+.toast-card.toast-success .toast-icon {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #10b981;
+}
+
+.toast-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+
+#zaeem-confirm-modal:not(.pointer-events-none) #zaeem-confirm-card {
+    transform: scale(1);
+}
+
+select option {
+    background-color: #0f172a !important;
+    color: #ffffff !important;
+}
